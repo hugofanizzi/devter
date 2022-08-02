@@ -1,0 +1,22 @@
+@use "../../styles/variables.scss" as vars;
+
+.container {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+.main {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: vars.$breakpoint-mobile) {
+  .main {
+    height: 90vh;
+    width: vars.$breakpoint-mobile;
+  }
+}

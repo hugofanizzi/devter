@@ -4,6 +4,8 @@ import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AppLayout from "../components/AppLayout";
+import Button from "../components/Button";
+import GitHub from "../components/Icons/GitHub";
 
 export default function Home() {
   const router = useRouter();
@@ -16,13 +18,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppLayout className={styles.fonts}>
-        <h1>
-          <a href="https://nextjs.org">devter</a>
-        </h1>
+      <AppLayout>
+        <section className={styles["container-component"]}>
+          <img src="/devter-logo.png" alt="Logo" />
+          <h1>Devter</h1>
+          <h2>
+            Talk about development <br />
+            with developers
+          </h2>
+          <div>
+            <Button>
+              <GitHub fill="#fff" width={24} height={24} />
+              Login with GitHub
+            </Button>
+          </div>
+        </section>
       </AppLayout>
-
-      <h1 className={styles.h1}>hola</h1>
     </>
   );
 }
