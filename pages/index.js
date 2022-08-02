@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AppLayout from "../components/AppLayout";
@@ -16,14 +16,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppLayout>
+      <AppLayout className={styles.fonts}>
         <h1>
           <a href="https://nextjs.org">devter</a>
         </h1>
-        <nav>
-          <Link href="/timeline">timeline</Link>
-        </nav>
       </AppLayout>
+
+      <h1 className={styles.h1}>hola</h1>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import styles from "./AppLayout.module.css";
+import styles from "./AppLayout.module.scss";
 
 export default function AppLayout({ children }) {
   return (
