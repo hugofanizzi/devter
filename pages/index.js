@@ -6,9 +6,18 @@ import { useRouter } from "next/router";
 import AppLayout from "../components/AppLayout";
 import Button from "../components/Button";
 import GitHub from "../components/Icons/GitHub";
+import loginWithGitHub from "../firebase/client";
 
 export default function Home() {
-  const router = useRouter();
+  const handleClick = () => {
+    loginWithGitHub()
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -27,7 +36,7 @@ export default function Home() {
             with developers
           </h2>
           <div>
-            <Button>
+            <Button onClick={handleClick}>
               <GitHub fill="#fff" width={24} height={24} />
               Login with GitHub
             </Button>
