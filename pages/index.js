@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.scss";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import AppLayout from "../components/AppLayout";
-import Button from "../components/Button";
-import GitHub from "../components/Icons/GitHub";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
 
-import {
-  loginWithGitHub,
-  onAutStateChanged,
-  mapUserFromFirebaseAuthToUser,
-} from "../firebase/client";
+import styles from '../styles/Home.module.scss'
+import AppLayout from '../components/AppLayout'
+import Button from '../components/Button'
+import GitHub from '../components/Icons/GitHub'
+
+import { loginWithGitHub, onAutStateChanged } from '../firebase/client'
 
 export default function Home() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(undefined)
 
   useEffect(() => {
-    onAutStateChanged(setUser);
-  }, []);
+    onAutStateChanged(setUser)
+  }, [])
 
   const handleClick = () => {
-    loginWithGitHub();
-  };
+    loginWithGitHub()
+  }
 
   return (
     <>
@@ -34,7 +28,7 @@ export default function Home() {
       </Head>
 
       <AppLayout>
-        <section className={styles["container-component"]}>
+        <section className={styles['container-component']}>
           <img src="/devter-logo.png" alt="Logo" />
           <h1>Devter</h1>
           <h2>
@@ -58,5 +52,5 @@ export default function Home() {
         </section>
       </AppLayout>
     </>
-  );
+  )
 }
