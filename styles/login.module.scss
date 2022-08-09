@@ -8,24 +8,26 @@
   color: theme.$primary-color;
 }
 
+.logo{
+  width: 120px;
+}
+
 .container-component {
   display: grid;
   height: 100%;
   place-content: center;
   place-items: center;
 
-  & img {
-    width: 120px;
-  }
 
   & h1 {
-    color: theme.$secondary-color;
+    color: theme.$primary-color;
     font-weight: 800;
     margin: 16px;
+    font-size: 32px;
   }
 
   & h2 {
-    color: theme.$primary-color;
+    color: theme.$secondary-color;
     font-size: 16px;
     margin: 0;
   }
