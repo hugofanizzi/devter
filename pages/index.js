@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/router"
 
 import Head from "next/head"
@@ -10,21 +10,13 @@ import Button from "components/Button"
 import GitHub from "components/Icons/GitHub"
 import Logo from "components/Icons/Logo"
 
-import { loginWithGitHub, onAutStateChanged } from "firebaseservices/client"
+import { loginWithGitHub } from "firebaseservices/client"
+import useUser, { USER_STATES } from "hooks/useUser"
 
 export default function Home() {
-  const [user, setUser] = useState(undefined)
-
-  const USER_STATES = {
-    NOT_LOGGED: null,
-    NOT_KNOWN: undefined,
-  }
+  const user = useUser()
 
   const router = useRouter()
-
-  useEffect(() => {
-    onAutStateChanged(setUser)
-  }, [])
 
   useEffect(() => {
     user && router.replace("/home")
