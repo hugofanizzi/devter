@@ -1,3 +1,5 @@
+
+
 .header{
     border-bottom: 1px solid #eee;
     background-color: #ffffffaa;
@@ -18,10 +20,30 @@
 
 
 .nav{
+    display: flex;
     background-color: #fff;
     bottom: 0;
     border-top: 1px solid #eee;
     height: 50px;
     position: sticky;
     width: 100%;
+
+    a{
+        align-items: center;
+        display: flex;
+        flex: 1 1 auto;
+        height: 100%;
+        justify-content: center;
+
+        &:hover{
+            background: radial-gradient(#0099ff22 15%, transparent 16%);
+            background-size: 180px 180px;
+            background-position: center;
+        }
+
+    }
+}
+
+.section{
+   flex-grow: 1;
 }

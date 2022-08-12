@@ -6,7 +6,10 @@ import {
   addDoc,
   collection,
   getDocs,
+  orderBy,
+  query,
 } from "firebase/firestore"
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDvAehs-eLOW2skct15VU9Bl1Ms02319e0",
@@ -18,11 +21,10 @@ const firebaseConfig = {
 }
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp()
-
 const db = getFirestore(app)
 
 const mapUserFromFirebaseAuthToUser = (user) => {
-  const profileInfo = user.providerData[0]
+  const profileInfo = user && user.providerData[0]
   return (
     user && {
       avatar: profileInfo?.photoURL,
@@ -46,11 +48,12 @@ export const loginWithGitHub = () => {
   return signInWithPopup(auth, githubProvider)
 }
 
-export const addDevit = ({ avatar, content, userId, userName }) => {
+export const addDevit = ({ avatar, content, userId, userName, img }) => {
   return addDoc(collection(db, "devits"), {
     avatar,
     content,
     userId,
+    img,
     userName,
     createdAt: Timestamp.fromDate(new Date()),
     likesCount: 0,
@@ -59,20 +62,26 @@ export const addDevit = ({ avatar, content, userId, userName }) => {
 }
 
 export const fechLatestDevits = () => {
-  return getDocs(collection(db, "devits")).then((snapshot) => {
+  return getDocs(
+    query(collection(db, "devits"), orderBy("createdAt", "desc"))
+  ).then((snapshot) => {
     return snapshot.docs.map((doc) => {
       const data = doc.data()
       const id = doc.id
       const { createdAt } = data
 
-      const date = new Date(createdAt.seconds * 1000)
-      const normalizedCreatedAt = new Intl.DateTimeFormat("es-ES").format(date)
-
       return {
         ...data,
         id,
-        createdAt: normalizedCreatedAt,
+        createdAt: +createdAt.toDate(),
       }
     })
   })
+}
+
+export const uploadImage = (file) => {
+  const storage = getStorage(app)
+  const refImage = ref(storage, `image/${file.name}`)
+  const task = uploadBytesResumable(refImage, file)
+  return task
 }

@@ -20,6 +20,10 @@ nav {
   text-align: center;
 }
 
+nav a:hover > svg{
+  stroke:theme.$primary-color ;
+}
+
 a {
   color: #096;
   text-decoration: none;

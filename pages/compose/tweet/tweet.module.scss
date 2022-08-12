@@ -1,12 +1,61 @@
-.textarea{
-    border: 0;
+//mixins
+@mixin textarea {
+    border: 3px solid transparent;
+    border-radius: 10px;
     padding: 15px;
     resize: none;
     font-size: 21px;
     width: 100%;
     outline: 0;
     min-height: 300px;
+}
 
+.form{
+    padding:10px
+}
+
+.formContainer{
+    display: flex;
+
+    align-items: flex-start;
+}
+.avatarContainer{
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.removeImg{
+    position: relative;
+}
+
+.button{
+    background: rgba(0, 0, 0, 0.3);
+    
+    font-size: 24px;
+    border: 0;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    top: 15px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+
+.img{
+    border-radius: 10px;
+    height: auto;
+    width: 100%;
+
+}
+
+.textarea{
+    @include textarea;
+    &--drag{
+        @include textarea;
+        border: 3px dashed #09f
+    }
 }
 
 .div{
