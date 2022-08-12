@@ -1,0 +1,22 @@
+.article {
+    display: flex;
+    padding: 10px 15px;
+    border-bottom: 2px solid #eaf7ff
+}
+
+.div{
+    padding-right: 10px;
+}
+
+.date{
+    color:#555;
+    font-size: 14px;
+}
+
+.img{
+    display: block;
+    width: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    max-height: 200px;
+}

@@ -1,0 +1,43 @@
+@use "../styles/variables.scss" as theme;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+textarea, input{
+  font-family: theme.$fonts-base;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+nav {
+  font-size: 24px;
+  text-align: center;
+}
+
+nav a:hover > svg{
+  stroke:theme.$primary-color ;
+}
+
+a {
+  color: #096;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    background: white;
+  }
+}

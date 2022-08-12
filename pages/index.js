@@ -1,12 +1,30 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import AppLayout from "../components/AppLayout";
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+
+import Head from "next/head"
+
+import styles from "styles/login.module.scss"
+
+import AppLayout from "components/AppLayout"
+import Button from "components/Button"
+import GitHub from "components/Icons/GitHub"
+import Logo from "components/Icons/Logo"
+
+import { loginWithGitHub } from "firebaseservices/client"
+import useUser, { USER_STATES } from "hooks/useUser"
 
 export default function Home() {
-  const router = useRouter();
+  const user = useUser()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    user && router.replace("/home")
+  }, [user])
+
+  const handleClick = () => {
+    loginWithGitHub()
+  }
 
   return (
     <>
@@ -17,13 +35,24 @@ export default function Home() {
       </Head>
 
       <AppLayout>
-        <h1>
-          <a href="https://nextjs.org">devter</a>
-        </h1>
-        <nav>
-          <Link href="/timeline">timeline</Link>
-        </nav>
+        <section className={styles["container-component"]}>
+          <Logo width="100" />
+          <h1>Devter</h1>
+          <h2>
+            Talk about development <br />
+            with developers
+          </h2>
+          <div>
+            {user === USER_STATES.NOT_LOGGED && (
+              <Button onClick={handleClick}>
+                <GitHub fill="#fff" width={24} height={24} />
+                Login with GitHub
+              </Button>
+            )}
+            {user === USER_STATES.NOT_KNOWNs && <img src="/spinner.gif" />}
+          </div>
+        </section>
       </AppLayout>
     </>
-  );
+  )
 }
