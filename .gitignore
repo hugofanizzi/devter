@@ -28,7 +28,5 @@ yarn-error.log*
 # local env files
 .env*.local
 .eslintcache
-./firebaseservices/firebase-keys.json
-
-# vercel
+firebaseservices/firebase-keys.json
 .vercel
