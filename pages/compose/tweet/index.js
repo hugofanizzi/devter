@@ -1,6 +1,5 @@
 import styles from "pages/compose/tweet/tweet.module.scss"
 
-import AppLayout from "components/AppLayout"
 import Button from "components/Button"
 import useUser from "hooks/useUser"
 import { useEffect, useState } from "react"
@@ -40,7 +39,6 @@ export default function ComposeTweet() {
     const onProgress = () => {}
     const onError = () => {}
     const onComplete = () => {
-      console.log("onComplete")
       getDownloadURL(task.snapshot.ref).then(setImageURL)
     }
 
@@ -95,47 +93,45 @@ export default function ComposeTweet() {
 
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Crear un Devit</title>
-        </Head>
-        <section className={styles.formContainer}>
-          {user && (
-            <section className={styles.avatarContainer}>
-              <Avatar src={user.avatar} />
+      <Head>
+        <title>Crear un Devit</title>
+      </Head>
+      <section className={styles.formContainer}>
+        {user && (
+          <section className={styles.avatarContainer}>
+            <Avatar src={user.avatar} />
+          </section>
+        )}
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <textarea
+            className={
+              drag === DRAG_IMAGE_STATES.DRAG_OVER
+                ? styles[`textarea--drag`]
+                : styles.textarea
+            }
+            placeholder="¿Qué esta pasando?"
+            value={message}
+            onChange={handleChange}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          ></textarea>
+          {imgURL && (
+            <section className={styles.removeImage}>
+              <button
+                onClick={() => setImageURL(null)}
+                className={styles.button}
+              >
+                x
+              </button>
+              <img className={styles.img} src={imgURL} />
             </section>
           )}
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <textarea
-              className={
-                drag === DRAG_IMAGE_STATES.DRAG_OVER
-                  ? styles[`textarea--drag`]
-                  : styles.textarea
-              }
-              placeholder="¿Qué esta pasando?"
-              value={message}
-              onChange={handleChange}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-            ></textarea>
-            {imgURL && (
-              <section className={styles.removeImage}>
-                <button
-                  onClick={() => setImageURL(null)}
-                  className={styles.button}
-                >
-                  x
-                </button>
-                <img className={styles.img} src={imgURL} />
-              </section>
-            )}
-            <div className={styles.div}>
-              <Button disabled={isButtonDisabled}>Devitear</Button>
-            </div>
-          </form>
-        </section>
-      </AppLayout>
+          <div className={styles.div}>
+            <Button disabled={isButtonDisabled}>Devitear</Button>
+          </div>
+        </form>
+      </section>
     </>
   )
 }

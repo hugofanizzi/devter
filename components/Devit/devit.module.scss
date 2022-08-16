@@ -1,14 +1,18 @@
 .article {
     display: flex;
     padding: 10px 15px;
-    border-bottom: 2px solid #eaf7ff
+    border-bottom: 2px solid #eaf7ff;
+    &:hover{
+        background: #f5f8fa;
+        cursor: pointer;
+    }
 }
 
 .div{
     padding-right: 10px;
 }
 
-.date{
+.time{
     color:#555;
     font-size: 14px;
 }
@@ -19,4 +23,13 @@
     margin-top: 10px;
     border-radius: 10px;
     max-height: 200px;
+}
+
+.a{
+    color : #555;
+    font-size:14px;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
 }

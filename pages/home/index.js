@@ -1,4 +1,3 @@
-import AppLayout from "components/AppLayout"
 import Devit from "components/Devit"
 import Create from "components/Icons/Create"
 import Home from "components/Icons/Home"
@@ -19,47 +18,45 @@ export default function HomePage() {
   }, [user])
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Inicio / Devter</title>
-        </Head>
-        <header className={styles.header}>
-          <h2 className={styles.h2}>Inicio</h2>
-        </header>
-        <section className={styles.section}>
-          {timeline.map(
-            ({ id, userName, img, avatar, content, userId, createdAt }) => (
-              <Devit
-                avatar={avatar}
-                id={id}
-                img={img}
-                key={id}
-                content={content}
-                userName={userName}
-                createdAt={createdAt}
-                userId={userId}
-              />
-            )
-          )}
-        </section>
-        <nav className={styles.nav}>
-          <Link href="/compose/tweet">
-            <a>
-              <Home width={32} height={32} stroke="#09f"></Home>
-            </a>
-          </Link>
-          <Link href="/compose/tweet">
-            <a>
-              <Search width={32} height={32} stroke="#09f"></Search>
-            </a>
-          </Link>
-          <Link href="/compose/tweet">
-            <a>
-              <Create width={32} height={32} stroke="#09f"></Create>
-            </a>
-          </Link>
-        </nav>
-      </AppLayout>
+      <Head>
+        <title>Inicio / Devter</title>
+      </Head>
+      <header className={styles.header}>
+        <h2 className={styles.h2}>Inicio</h2>
+      </header>
+      <section className={styles.section}>
+        {timeline.map(
+          ({ id, userName, img, avatar, content, userId, createdAt }) => (
+            <Devit
+              avatar={avatar}
+              id={id}
+              img={img}
+              key={id}
+              content={content}
+              userName={userName}
+              createdAt={createdAt}
+              userId={userId}
+            />
+          )
+        )}
+      </section>
+      <nav className={styles.nav}>
+        <Link href="/compose/tweet">
+          <a>
+            <Home width={32} height={32} stroke="#09f"></Home>
+          </a>
+        </Link>
+        <Link href="/compose/tweet">
+          <a>
+            <Search width={32} height={32} stroke="#09f"></Search>
+          </a>
+        </Link>
+        <Link href="/compose/tweet">
+          <a>
+            <Create width={32} height={32} stroke="#09f"></Create>
+          </a>
+        </Link>
+      </nav>
     </>
   )
 }
