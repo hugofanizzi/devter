@@ -5,9 +5,10 @@ import {
   Timestamp,
   addDoc,
   collection,
-  getDocs,
   orderBy,
   query,
+  onSnapshot,
+  limit,
 } from "firebase/firestore"
 import { getStorage, ref, uploadBytesResumable } from "firebase/storage"
 
@@ -73,13 +74,23 @@ const mapDevitFromFirebaseToDevitObject = (doc) => {
   }
 }
 
-export const fechLatestDevits = () => {
-  return getDocs(
-    query(collection(db, "devits"), orderBy("createdAt", "desc"))
-  ).then((snapshot) => {
-    return snapshot.docs.map(mapDevitFromFirebaseToDevitObject)
-  })
+export const listenLatestDevits = (callback) => {
+  return onSnapshot(
+    query(collection(db, "devits"), orderBy("createdAt", "desc"), limit(20)),
+    ({ docs }) => {
+      const newDevits = docs.map(mapDevitFromFirebaseToDevitObject)
+      callback(newDevits)
+    }
+  )
 }
+
+// export const fechLatestDevits = () => {
+//   return getDocs(
+//     query(collection(db, "devits"), orderBy("createdAt", "desc"))
+//   ).then((snapshot) => {
+//     return snapshot.docs.map(mapDevitFromFirebaseToDevitObject)
+//   })
+// }
 
 export const uploadImage = (file) => {
   const storage = getStorage(app)
